@@ -16,7 +16,7 @@ end
 c = Grenache::Base.new
 
 c.listen("test",5001) do |env|
-    req = Oj.dump(env['rack.input'].read)
+    req = Oj.load(env['rack.input'].read)
     [200,nil,"hello #{req}"]
 end
 ```
