@@ -22,7 +22,7 @@ end
 ```
 
 
-## lookup for a service
+## calling a remote service
 
 ```ruby
 c.request('test', 'world')
