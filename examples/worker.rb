@@ -3,7 +3,7 @@ require 'grenache-ruby-base'
 require_relative "../lib/grenache/base.rb"
 
 Grenache::Base.configure do |conf|
-   conf.grape_address = "http://127.0.0.1:30002"
+   conf.grape_address = "http://127.0.0.1:40002/"
 end
 
 EM.run do

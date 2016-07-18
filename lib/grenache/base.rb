@@ -15,7 +15,8 @@ module Grenache
 
     def request(key, payload, &block)
       services = lookup(key)
-      res = HTTPClient.new.post(services).body
+      json = Oj.dump(payload)
+      res = HTTPClient.new.post(services.sample,json).body
     end
   end
 end
