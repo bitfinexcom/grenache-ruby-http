@@ -20,7 +20,7 @@ module Grenache
     def request(key, payload, &block)
       services = lookup(key)
       json = Oj.dump(payload)
-      res = http.post(services.sample,json).body
+      res = HTTPClient.post(services.sample,json).body
     end
   end
 end

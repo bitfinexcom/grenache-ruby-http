@@ -9,8 +9,9 @@ end
 c = Grenache::Base.new
 start_time = Time.now
 
-10000.times do |n|
- c.request("test","world #{n}")
+10.times do |n|
+ resp = c.request("test","world #{n}")
+ puts resp
 end
 
 puts "Total Time: #{Time.now - start_time}"
