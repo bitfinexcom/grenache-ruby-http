@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem "eventmachine", "~> 1.0.9"
 gem "faye-websocket", "~> 0.10.3"
 gem "grenache-ruby-base", "~> 0.0.3"
-gem 'httpclient'
+gem 'httpclient', "~> 2.8"
 
 gem "oj", "~> 2.1.0"
 gem "thin"
