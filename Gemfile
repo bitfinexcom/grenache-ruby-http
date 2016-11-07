@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem "eventmachine", "~> 1.0.9"
 gem "faye-websocket", "~> 0.10.3"
-gem "grenache-ruby-base", path: "../grenache-ruby-base"
+gem "grenache-ruby-base", "~> 0.0.3"
 gem 'httpclient'
 
 gem "oj", "~> 2.1.0"
