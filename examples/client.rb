@@ -1,4 +1,4 @@
-require 'grenahce-ruby-http'
+require 'grenache-ruby-http'
 
 Grenache::Base.configure do |conf|
    conf.grape_address = "http://127.0.0.1:40002/"
