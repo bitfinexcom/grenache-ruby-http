@@ -1,5 +1,5 @@
 module Grenache
-  class Base
+  class BaseHttp < Grenache::Base
     def listen(key, port,  opts={}, &block)
       start_http_service(port,&block)
 

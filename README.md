@@ -13,7 +13,7 @@ end
 ## Announce a service
 
 ```ruby
-c = Grenache::Base.new
+c = Grenache::BaseHttp.new
 
 c.listen("test",5001) do |env|
     req = Oj.load(env['rack.input'].read)
