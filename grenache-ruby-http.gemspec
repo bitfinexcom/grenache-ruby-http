@@ -16,9 +16,9 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "eventmachine", "~> 1.0"
+  spec.add_runtime_dependency "eventmachine", "~> 1.2"
   spec.add_runtime_dependency "faye-websocket", "~> 0.10"
-  spec.add_runtime_dependency "grenache-ruby-base", ">= 0.0.5"
+  spec.add_runtime_dependency "grenache-ruby-base", ">= 0.0.6"
   spec.add_runtime_dependency "httpclient", "~> 2.8"
   spec.add_runtime_dependency "oj", "~> 2.17"
   spec.add_runtime_dependency "thin", "~> 1.7"
