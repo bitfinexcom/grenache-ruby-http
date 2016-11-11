@@ -19,10 +19,16 @@ module Grenache
 
     def request(key, payload, &block)
       services = lookup(key)
-      json = Oj.dump(payload)
-      service = services.sample.sub("tcp://","http://")
-      service.prepend("http://") unless service.start_with?("http://")
-      HTTPClient.post(service,json).body
+      if services.size > 0
+        json = Oj.dump(payload)
+        service = services.sample.sub("tcp://","http://")
+        service.prepend("http://") unless service.start_with?("http://")
+        return [nil, HTTPClient.post(service,json).body]
+      else
+        return ["NoPeerFound",nil]
+      end
+    rescue Exception => e
+      return [e, nil]
     end
   end
 end

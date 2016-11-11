@@ -1,4 +1,4 @@
-require 'grenahce-ruby-http'
+require 'grenache-ruby-http'
 
 Grenache::Base.configure do |conf|
    conf.grape_address = "http://127.0.0.1:40002/"
@@ -8,8 +8,12 @@ c = Grenache::Http.new
 start_time = Time.now
 
 10.times do |n|
- resp = c.request("test","world #{n}")
- puts resp
+ err,resp = c.request("test","world #{n}")
+ if resp
+   puts resp
+ else
+   puts err
+ end
 end
 
 puts "Total Time: #{Time.now - start_time}"
