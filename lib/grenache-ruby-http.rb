@@ -7,4 +7,4 @@ require 'thin'
 require 'rack'
 
 require 'grenache/http'
-require 'grenache/version'
+require 'grenache/http/version'
