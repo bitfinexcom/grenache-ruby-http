@@ -6,5 +6,5 @@ require 'grenache-ruby-base'
 require 'thin'
 require 'rack'
 
-require 'grenache/base-http'
+require 'grenache/http'
 require 'grenache/version'
