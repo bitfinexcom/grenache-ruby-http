@@ -25,7 +25,7 @@ module Grenache
         service = services.sample.sub("tcp://","http://")
         service.prepend("http://") unless service.start_with?("http://")
         resp = HTTParty.post(service,{body: json})
-        return [nil, resp.body]
+        return [nil, Oj.load(resp.body)]
       else
         return ["NoPeerFound",nil]
       end
