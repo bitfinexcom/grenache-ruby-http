@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'grenache/version'
+require 'grenache/http/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "grenache-ruby-http"
@@ -18,10 +18,9 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "eventmachine", "~> 1.2"
   spec.add_runtime_dependency "faye-websocket", "~> 0.10"
-  spec.add_runtime_dependency "grenache-ruby-base", ">= 0.0.6"
-  spec.add_runtime_dependency "httpclient", "~> 2.8"
+  spec.add_runtime_dependency "grenache-ruby-base", "0.1.1"
+  spec.add_runtime_dependency "httparty", "~> 0.14.0"
   spec.add_runtime_dependency "oj", "~> 2.17"
   spec.add_runtime_dependency "thin", "~> 1.7"
-
 
 end

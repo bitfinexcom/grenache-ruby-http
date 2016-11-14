@@ -1,7 +1,6 @@
-require 'thin'
-require 'grenache-ruby-http'
+require_relative '../lib/grenache-ruby-http.rb'
 
-Grenache::Base.configure do |conf|
+Grenache::Http.configure do |conf|
    conf.grape_address = "http://127.0.0.1:40002/"
 end
 

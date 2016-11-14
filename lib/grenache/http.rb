@@ -1,3 +1,4 @@
+
 module Grenache
   class Http < Grenache::Base
     def listen(key, port,  opts={}, &block)
@@ -19,10 +20,17 @@ module Grenache
 
     def request(key, payload, &block)
       services = lookup(key)
-      json = Oj.dump(payload)
-      service = services.sample.sub('tcp://','http://')
-      service.prepend('http://') unless service.start_with?('http://')
-      Oj.load(HTTPClient.post(service, json).body)
+      if services.size > 0
+        json = Oj.dump(payload)
+        service = services.sample.sub("tcp://","http://")
+        service.prepend("http://") unless service.start_with?("http://")
+        resp = HTTParty.post(service,{body: json})
+        return [nil, Oj.load(resp.body)]
+      else
+        return ["NoPeerFound",nil]
+      end
+    rescue Exception => e
+      return [e, nil]
     end
   end
 end
