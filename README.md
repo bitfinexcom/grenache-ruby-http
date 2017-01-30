@@ -15,12 +15,10 @@ end
 ```ruby
 c = Grenache::BaseHttp.new
 
-c.listen("test",5001) do |env|
-    req = Oj.load(env['rack.input'].read)
-    [200,nil,"hello #{req}"]
+c.listen("test",5001) do |req|
+    "hello #{req.payload}"
 end
 ```
-
 
 ## calling a remote service
 
