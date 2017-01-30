@@ -12,8 +12,9 @@ EM.run do
   c = Grenache::Http.new
 
   c.listen('test', 5004) do |env|
-    req = Oj.load(env['rack.input'].read)
-    [200,nil,"hello #{req}"]
+    body = env['rack.input'].read
+    req = Grenache::Message.parse(body)
+    "hello #{req.payload}"
   end
 
 end

@@ -12,20 +12,21 @@ module Grenache
     def start_http_service(port, &block)
       EM.defer {
         app = -> (env) {
-          block.call(env)
+          resp = block.call(env)
+          [200,nil, Message.req(resp).to_json]
         }
         server = Thin::Server.start('0.0.0.0', port, app, {signals: false})
       }
     end
 
-    def request(key, payload, &block)
+    def request(key, payload)
       services = lookup(key)
       if services.size > 0
-        json = Oj.dump(payload)
+        json = Message.req(payload).to_json
         service = services.sample.sub("tcp://","http://")
         service.prepend("http://") unless service.start_with?("http://")
         resp = HTTParty.post(service,{body: json})
-        return [nil, Oj.load(resp.body)]
+        return [false, Message.parse(resp.body)]
       else
         return ["NoPeerFound",nil]
       end
