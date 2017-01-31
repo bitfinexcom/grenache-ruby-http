@@ -12,8 +12,9 @@ module Grenache
     def start_http_service(port, &block)
       EM.defer {
         app = -> (env) {
-          resp = block.call(env)
-          [200,nil, Message.req(resp).to_json]
+          req = Message.parse(env['rack.input'].read)
+          resp = block.call(req)
+          [200,nil, Message.response_to(req,resp).to_json]
         }
         server = Thin::Server.start('0.0.0.0', port, app, {signals: false})
       }

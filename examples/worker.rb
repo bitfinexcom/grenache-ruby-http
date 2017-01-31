@@ -11,10 +11,8 @@ EM.run do
 
   c = Grenache::Http.new
 
-  c.listen('test', 5004) do |env|
-    body = env['rack.input'].read
-    req = Grenache::Message.parse(body)
-    "hello #{req.payload}"
+  c.listen('test', 5004) do |msg|
+    "hello #{msg.payload}"
   end
 
 end
