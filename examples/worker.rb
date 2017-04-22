@@ -12,7 +12,7 @@ EM.run do
   c = Grenache::Http.new
 
   c.listen('test', 5004) do |msg|
-    "hello #{msg.payload}"
+    [200, nil, "hello #{msg.payload}"]
   end
 
 end

@@ -13,8 +13,8 @@ module Grenache
       EM.defer {
         app = -> (env) {
           req = Message.parse(env['rack.input'].read)
-          resp = block.call(req)
-          [200,nil, Message.response_to(req,resp).to_json]
+          status, err, resp = block.call(req)
+          [status, err, Message.response_to(req,resp).to_json]
         }
         server = Thin::Server.start('0.0.0.0', port, app, {signals: false})
       }

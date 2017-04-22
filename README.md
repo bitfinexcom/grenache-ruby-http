@@ -16,7 +16,7 @@ end
 c = Grenache::BaseHttp.new
 
 c.listen("test",5001) do |req|
-    "hello #{req.payload}"
+   [200,nil, "hello #{req.payload}"]
 end
 ```
 
