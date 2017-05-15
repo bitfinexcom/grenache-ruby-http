@@ -23,7 +23,7 @@ module Grenache
     def request(key, payload)
       services = lookup(key)
       if services.size > 0
-        json = ServiceMessage.new(payload).to_json
+        json = ServiceMessage.new(payload,key).to_json
         service = services.sample.sub("tcp://","http://")
         service.prepend("http://") unless service.start_with?("http://")
         resp = HTTParty.post(service,{body: json})
