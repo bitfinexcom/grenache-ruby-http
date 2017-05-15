@@ -12,7 +12,8 @@ module Grenache
       EM.defer {
         app = -> (env) {
           req = ServiceMessage.parse(env['rack.input'].read)
-          err, payload = block.call(req)
+          e, payload = block.call(req)
+          err = e.kind_of?(Exception) ? e.message : e
           [200,nil, ServiceMessage.new(payload, err, req.rid).to_json]
         }
         server = Thin::Server.start('0.0.0.0', port, app, {signals: false})
