@@ -8,9 +8,9 @@ c = Grenache::Http.new
 start_time = Time.now
 
 10.times do |n|
-  err,resp = c.request("test","world #{n}")
+  err,resp = c.request("rpc_test","world #{n}")
   if !err
-    puts "response: #{resp.payload}"
+    puts "response: #{resp}"
   else
     puts err
   end
