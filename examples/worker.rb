@@ -12,7 +12,8 @@ EM.run do
   c = Grenache::Http.new
 
   c.listen('rpc_test', 5004) do |msg|
-    [StandardError.new("Error!"),"hello #{msg.payload}"]
+    #[StandardError.new("Error!"),"hello #{msg.payload}"]
+    [nil, "hello #{msg.payload}"]
   end
 
 end
