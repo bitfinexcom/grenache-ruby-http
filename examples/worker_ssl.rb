@@ -5,6 +5,8 @@ Grenache::Http.configure do |conf|
    conf.key = File.expand_path('.') + "/ssl/server-key.pem"
    conf.cert_pem = File.expand_path('.') + "/ssl/server-crt.pem"
    conf.ca = File.expand_path('.') + "/ssl/ca-crt.pem"
+   conf.verify_mode = Grenache::SSL_VERIFY_PEER
+   conf.service_host = "localhost"
 end
 
 EM.run do

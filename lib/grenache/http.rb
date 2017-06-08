@@ -1,6 +1,7 @@
 require "puma/events"
 
 module Grenache
+
   class Http < Grenache::Base
 
     def listen(key, port,  opts={}, &block)
@@ -22,16 +23,18 @@ module Grenache
 
       event = Puma::Events.new $stdout, $stderr
       server = Puma::Server.new app, event
+      host = config.service_host
 
       if tls?
         ctx = Puma::MiniSSL::Context.new
         ctx.key = config.key
         ctx.cert = config.cert_pem
         ctx.ca = config.ca
-        ctx.verify_mode = Puma::MiniSSL::VERIFY_PEER
-        server.add_ssl_listener "0.0.0.0", port, ctx
+        ctx.verify_mode = config.verify_mode
+
+        server.add_ssl_listener host, port, ctx
       else
-        server.add_tcp_listener "0.0.0.0", port
+        server.add_tcp_listener host, port
       end
 
       puts "starting server on port #{port}"

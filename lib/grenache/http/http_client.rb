@@ -14,17 +14,12 @@ module Grenache
         if tls?
           options[:pem]         = pem
           options[:ssl_ca_file] = ssl_ca_file
-          options[:verify]      = !!verify
         end
 
         self.class.post uri, options
       end
 
       private
-
-      def verify
-        @config.reject_unauthorized
-      end
 
       def tls?
         !! @config.cert_pem
@@ -34,10 +29,6 @@ module Grenache
         cert = File.read @config.cert_pem
         key = File.read @config.key
         cert + key
-      end
-
-      def key
-        @config.key
       end
 
       def ssl_ca_file
