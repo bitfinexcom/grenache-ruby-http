@@ -7,9 +7,14 @@ module Grenache
         @config = config
       end
 
-      def request uri, body
+      def request uri, body, params = {}
         options = {body: body}
-        options[:timeout] = timeout  if timeout
+
+        if params[:timeout]
+          options[:timeout] = params[:timeout]
+        else
+          options[:timeout] = timeout if timeout
+        end
 
         if tls?
           options[:pem]         = pem

@@ -41,12 +41,12 @@ module Grenache
       server.run
     end
 
-    def request(key, payload)
+    def request(key, payload, params = {})
       services = lookup(key)
       if services.size > 0
         json = ServiceMessage.new(payload,key).to_json
         service = get_random_service services
-        resp = http_client.request service, json
+        resp = http_client.request service, json, params
         msg = ServiceMessage.parse(resp.body)
         return [msg.err, msg.payload]
       else
