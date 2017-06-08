@@ -1,11 +1,10 @@
 require_relative '../lib/grenache-ruby-http.rb'
-require 'pry'
 
 Grenache::Http.configure do |conf|
    conf.grape_address = "http://127.0.0.1:40002/"
-   conf.key = File.expand_path('.') + "/ssl/serverkey.pem"
-   conf.cert_pem = File.expand_path('.') + "/ssl/serverreq.pem"
-   conf.ca = File.expand_path('.') + "/ssl/cacert.pem"
+   conf.key = File.expand_path('.') + "/ssl/server-key.pem"
+   conf.cert_pem = File.expand_path('.') + "/ssl/server-crt.pem"
+   conf.ca = File.expand_path('.') + "/ssl/ca-crt.pem"
 end
 
 EM.run do
@@ -15,9 +14,9 @@ EM.run do
 
   c = Grenache::Http.new
 
-  c.listen('rpc_test', 5004) do |msg, cert|
+  c.listen('rpc_test', 5004) do |msg, fingerprint|
     #[StandardError.new("Error!"),"hello #{msg.payload}"]
-    puts "CERT: #{cert}"
+    puts fingerprint
     [nil,"hello #{msg.payload}"]
   end
 

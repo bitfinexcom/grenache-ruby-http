@@ -2,7 +2,6 @@ module Grenache
   class Http
     class HttpClient
       include HTTParty
-      ssl_version :SSLv23
 
       def initialize config
         @config = config
@@ -13,9 +12,9 @@ module Grenache
         options[:timeout] = timeout  if timeout
 
         if tls?
-          options[:pkcs12]      = File.open(pem)
+          options[:pem]         = pem
           options[:ssl_ca_file] = ssl_ca_file
-          options[:verify]      = verify
+          options[:verify]      = !!verify
         end
 
         self.class.post uri, options
@@ -32,7 +31,13 @@ module Grenache
       end
 
       def pem
-        @config.cert_pem
+        cert = File.read @config.cert_pem
+        key = File.read @config.key
+        cert + key
+      end
+
+      def key
+        @config.key
       end
 
       def ssl_ca_file

@@ -14,7 +14,8 @@ module Grenache
    def start_http_service(port, &block)
       app = -> (env) {
         req = ServiceMessage.parse(env['rack.input'].read)
-        e, payload = block.call(req, env['puma.peercert'])
+        fingerprint = extract_fingerprint(env['puma.peercert'])
+        e, payload = block.call(req, fingerprint)
         err = e.kind_of?(Exception) ? e.message : e
         [200,[], [ServiceMessage.new(payload, err, req.rid).to_json]]
       }
@@ -53,6 +54,12 @@ module Grenache
     end
 
     private
+
+    def extract_fingerprint cert
+      return "" unless cert
+      cert = OpenSSL::X509::Certificate.new cert
+      OpenSSL::Digest::SHA1.new(cert.to_der).to_s
+    end
 
     def tls?
       !! config.cert_pem
