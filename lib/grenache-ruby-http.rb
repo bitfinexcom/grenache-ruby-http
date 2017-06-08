@@ -1,10 +1,9 @@
 require 'oj'
-require 'eventmachine'
 require 'faye/websocket'
 require 'httparty'
 require 'grenache-ruby-base'
-require 'thin'
-require 'rack'
+require 'puma'
 
 require 'grenache/http'
 require 'grenache/http/version'
+require 'grenache/http/http_client'
