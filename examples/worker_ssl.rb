@@ -3,9 +3,7 @@ require_relative '../lib/grenache-ruby-http.rb'
 Grenache::Http.configure do |conf|
    conf.grape_address = "http://127.0.0.1:40002/"
    conf.key = File.expand_path('.') + "/ssl/server-key.pem"
-   conf.cert_pem = File.expand_path('.') + "/ssl/server-crt.pem"
-   conf.ca = File.expand_path('.') + "/ssl/ca-crt.pem"
-   conf.verify_mode = Grenache::SSL_VERIFY_PEER
+   conf.cert_pem = File.expand_path('.') + "/ssl/server-chain.pem"
    conf.service_host = "localhost"
 end
 
