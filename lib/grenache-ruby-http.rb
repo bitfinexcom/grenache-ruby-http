@@ -2,7 +2,7 @@ require 'oj'
 require 'faye/websocket'
 require 'httparty'
 require 'grenache-ruby-base'
-require 'puma'
+require 'thin'
 
 require 'grenache/http'
 require 'grenache/http/version'
