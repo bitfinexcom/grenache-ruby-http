@@ -4,6 +4,7 @@ Grenache::Http.configure do |conf|
    conf.grape_address = "http://127.0.0.1:40002/"
    conf.key = File.expand_path('.') + "/ssl/server-key.pem"
    conf.cert_pem = File.expand_path('.') + "/ssl/server-chain.pem"
+   conf.ca = File.expand_path('.') + "/ssl/ca-crt.pem"
    conf.service_host = "localhost"
 end
 
@@ -16,7 +17,7 @@ EM.run do
 
   c.listen('rpc_test', 5004) do |msg, fingerprint|
     #[StandardError.new("Error!"),"hello #{msg.payload}"]
-    puts fingerprint
+    puts "certificate fingerprint #{fingerprint}"
     [nil,"hello #{msg.payload}"]
   end
 
