@@ -19,6 +19,12 @@ module Grenache
           [200,nil, ServiceMessage.new(payload, err, req.rid).to_json]
         }
         server = Thin::Server.new config.service_host, port, {signals: false}, app
+
+        if config.thin_threaded
+          server.threaded = true
+          server.threadpool_size = config.thin_threadpool_size
+        end
+
         if tls?
           server.ssl = true
           server.ssl_options = {

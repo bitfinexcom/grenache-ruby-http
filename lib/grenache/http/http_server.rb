@@ -1,9 +1,6 @@
 module Thin
   class Connection < EventMachine::Connection
     def ssl_verify_peer cert
-      # ca cert is valid
-      return true if ca_cert == cert
-
       client = OpenSSL::X509::Certificate.new cert
       store.verify client
     end
