@@ -1,10 +1,8 @@
 require_relative '../lib/grenache-ruby-http.rb'
 
-Grenache::Http.configure do |conf|
-   conf.grape_address = "http://127.0.0.1:40002/"
-end
 
-c = Grenache::Http.new
+c = Grenache::Http.new grape_address: "http://127.0.0.1:40002/"
+
 start_time = Time.now
 
 10.times do |n|

@@ -39,7 +39,7 @@ module Grenache
 
     def request(key, payload, params={})
       services = lookup(key)
-      if services.size > 0
+      if services && services.size > 0
         json = ServiceMessage.new(payload,key).to_json
         service = get_random_service services
         resp = http_client.request service, json, params
