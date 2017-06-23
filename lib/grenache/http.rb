@@ -1,6 +1,12 @@
 module Grenache
   class Http < Grenache::Base
 
+    default_conf do |conf|
+      conf.thin_threaded = true
+      conf.threadpool_size = 10
+      conf.verify_mode = Grenache::SSL_VERIFY_PEER
+    end
+
     def listen(key, port,  opts={}, &block)
       start_http_service(port,&block)
 
@@ -32,6 +38,7 @@ module Grenache
             cert_chain_file: config.cert_pem,
             verify_peer: true
           }
+          server.backend.ca_cert = File.read config.ca
         end
         server.start
       }
