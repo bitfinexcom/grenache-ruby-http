@@ -4,6 +4,7 @@ module Grenache
     default_conf do |conf|
       conf.thin_threaded = true
       conf.threadpool_size = 10
+      conf.verify_mode = Grenache::SSL_VERIFY_PEER
     end
 
     def listen(key, port,  opts={}, &block)
