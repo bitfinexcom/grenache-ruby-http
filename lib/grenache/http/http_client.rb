@@ -8,6 +8,7 @@ module Grenache
       end
 
       def request uri, body, params = {}
+        uri = URI.parse(uri)
         options = {body: body}
 
         if params[:timeout]
@@ -16,18 +17,31 @@ module Grenache
           options[:timeout] = timeout if timeout
         end
 
-        if tls?
-          options[:pem]         = pem
-          options[:ssl_ca_file] = ssl_ca_file
+        if pem? or p12?
+          uri.scheme = "https"
         end
 
-        self.class.post uri, options
+        if pem?
+          options[:pem]          = pem
+          options[:pem_password] = @config.cert_pem_password
+          options[:ssl_ca_file]  = ssl_ca_file
+        elsif p12?
+          options[:p12]          = IO.binread @config.cert_p12
+          options[:p12_password] = @config.cert_p12_password
+          options[:ssl_ca_file]  = ssl_ca_file
+        end
+
+        self.class.post uri.to_s, options
       end
 
       private
 
-      def tls?
+      def pem?
         !! @config.cert_pem
+      end
+
+      def p12?
+        !! @config.cert_p12
       end
 
       def pem

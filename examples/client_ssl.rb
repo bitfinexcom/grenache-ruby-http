@@ -1,9 +1,8 @@
 require_relative '../lib/grenache-ruby-http.rb'
 
 c = Grenache::Http.new(grape_address: "http://127.0.0.1:40002/",
-                       key:  File.expand_path('.') + "/ssl/client1-key.pem",
-                       cert_pem: File.expand_path('.') + "/ssl/client1-crt.pem",
-                       ca: File.expand_path('.') + "/ssl/ca-crt.pem")
+                       cert_p12: File.expand_path('.') + "/ssl/client1.p12",
+                       ca: File.expand_path('.') + "/ssl/ca.crt")
 
 start_time = Time.now
 
