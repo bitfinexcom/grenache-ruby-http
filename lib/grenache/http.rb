@@ -36,8 +36,10 @@ module Grenache
           server.ssl_options = {
             private_key_file: config.key,
             cert_chain_file: config.cert_pem,
+            ecdh_curve: config.cert_ecdh_curve,
             verify_peer: true
           }
+
           server.backend.ca_cert = File.read config.ca
         end
         server.start
