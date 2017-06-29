@@ -40,7 +40,7 @@ module Grenache
             verify_peer: true
           }
 
-          server.backend.ca_cert = File.read config.ca
+          server.backend.ca_cert = config.ca
         end
         server.start
       }

@@ -15,8 +15,7 @@ module Thin
     private
     def store
        @store ||= OpenSSL::X509::Store.new.tap do |store|
-         root = OpenSSL::X509::Certificate.new backend.ca_cert
-         store.add_cert root
+         store.add_file backend.ca_cert
        end
     end
   end
