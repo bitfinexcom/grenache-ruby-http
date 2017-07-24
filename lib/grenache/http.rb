@@ -3,7 +3,7 @@ module Grenache
 
     default_conf do |conf|
       conf.thin_threaded = true
-      conf.threadpool_size = 10
+      conf.thin_threadpool_size = 10
       conf.verify_mode = Grenache::SSL_VERIFY_PEER
       conf.thin_timeout = 30
       conf.thin_max_conns = 1024
