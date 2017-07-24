@@ -5,6 +5,10 @@ module Grenache
       conf.thin_threaded = true
       conf.threadpool_size = 10
       conf.verify_mode = Grenache::SSL_VERIFY_PEER
+      conf.thin_timeout = 30
+      conf.thin_max_conns = 1024
+      conf.thin_max_persistent_conns = 512
+      conf.thin_no_epoll = false
     end
 
     def listen(key, port,  opts={}, &block)
@@ -30,6 +34,12 @@ module Grenache
           server.threaded = true
           server.threadpool_size = config.thin_threadpool_size
         end
+
+        # Configure thin
+        server.timeout = config.thin_timeout
+        server.maximum_connections = config.thin_max_conns
+        server.maximum_persistent_connections = config.thin_max_persistent_conns
+        server.no_epoll = config.thin_no_epoll
 
         if tls?
           server.ssl = true
