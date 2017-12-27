@@ -71,6 +71,20 @@ module Grenache
       return [e, nil]
     end
 
+    def put(payload, params={})
+      resp = link.send('put', payload, params)
+      return [nil, resp]
+    rescue Exception => e
+      return [e, nil]
+    end
+
+    def get(t_hash, params={})
+      resp = link.send('get', t_hash, params)
+      return [nil, Oj.dump(resp)]
+    rescue Exception => e
+      return [e, nil]
+    end
+
     private
 
     def tls?
