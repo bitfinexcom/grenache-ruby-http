@@ -11,7 +11,7 @@ EM.run do
   Signal.trap("INT")  { EventMachine.stop }
   Signal.trap("TERM") { EventMachine.stop }
 
-  c = Grenache::Http.new grape_address: "http://127.0.0.1:40002/"
+  c = Grenache::Http.new grape_address: "http://127.0.0.1:30001/"
 
   c.listen('rpc_test', 5004) do |msg|
     #[StandardError.new("Error!"),"hello #{msg.payload}"]
