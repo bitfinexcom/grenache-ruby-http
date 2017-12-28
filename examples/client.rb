@@ -1,7 +1,7 @@
 require_relative '../lib/grenache-ruby-http.rb'
 
 
-c = Grenache::Http.new grape_address: "http://127.0.0.1:40002/"
+c = Grenache::Http.new grape_address: "http://127.0.0.1:30001/"
 
 start_time = Time.now
 
