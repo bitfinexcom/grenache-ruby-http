@@ -118,6 +118,20 @@ Sends a single request to a RPC server/worker.
 [Example](https://github.com/bitfinexcom/grenache-ruby-http/blob/master/examples/client.rb).
 
 
+### client.put(data, options)
+
+  - `data`
+    - `:v`: &lt;String&gt; value to store
+  - `options`
+    - `:timeout` Timeout for the request
+
+Puts a value into the DHT.
+
+### client.get(hash)
+  - `hash` &lt;String&gt; Hash of the data to receive
+
+Retrieves a stored value from the DHT via a `hash` &lt;String&gt;.
+
 ### client.listen(key, port, options)
   - `name` &lt;String&gt; Name of the service to announce
   - `port` &lt;Number&gt; Port to listen
