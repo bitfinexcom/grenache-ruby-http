@@ -103,12 +103,9 @@ module Grenache
 
     def get_random_service services
       service = services.sample
-      service.sub!("tcp://","https://")
-      if tls?
-        service.prepend("https://") unless service.start_with?("https://")
-      else
-        service.prepend("http://") unless service.start_with?("http://")
-      end
+      proto = tls? ? 'https://' : 'http://'
+      service = service.sub('tcp://', proto)
+      service.prepend(proto) unless service.start_with?(proto)
       service
     end
   end
